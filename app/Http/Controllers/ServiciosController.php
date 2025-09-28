@@ -35,6 +35,6 @@ class ServiciosController extends Controller
 
     public function store(Request $request)
     {
-        return view('servicios.store');
+        
     }
 }

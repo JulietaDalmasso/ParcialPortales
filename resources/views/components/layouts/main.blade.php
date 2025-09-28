@@ -16,12 +16,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('servicios') }}">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('contacto') }}">Contacto</a></li>
-                </ul>
+                <div class="navbar-nav">
+                    <x-nav-link route="home">Home</x-nav-link>
+                    <x-nav-link route="servicios">Servicios</x-nav-link>
+                    <x-nav-link route="blog">Blog</x-nav-link>
+                    <x-nav-link route="contacto">Contacto</x-nav-link>
+                </div>
             </div>
         </div>
     </nav>

@@ -3,21 +3,23 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
+//home
+Route::get('/', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+//servicios
+Route::get('/servicios', [App\Http\Controllers\ServiciosController::class, 'index'])->name('servicios');
+//blog
+Route::get('/blog', [App\Http\Controllers\HomeController::class, 'blog'])->name('blog');
+//contacto
+Route::get('/contacto', [App\Http\Controllers\HomeController::class, 'contacto'])->name('contacto');
 
-Route::get('/servicios', function () {
-    return view('servicios');
-})->name('servicios');
+//detalle del servicio
+Route::get('/servicios/{id}', [App\Http\Controllers\ServiciosController::class, 'detalle'] )
+->name('servicios.detalle')
+->whereNumber('id');
 
+//ruta para crear un nuevo servicio
+Route::get('/servicios/nuevo', [App\Http\Controllers\ServiciosController::class, 'crear'] )->name('servicios.crear');
 
-Route::get('/blog', function () {
-    return view('blog');
-})->name('blog');
-
-
-Route::get('/contacto', function () {
-    return view('contacto');
-})->name('contacto');
+//ruta para crear un nuevo servicio
+Route::post('/servicios/nuevo', [App\Http\Controllers\ServiciosController::class, 'store'] )->name('servicios.store');

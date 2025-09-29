@@ -1,5 +1,3 @@
-
-
 <x-layouts.main>
     <x-slot:title>Blog '{{ $novedad->titulo }}'</x-slot:title>
 

@@ -7,3 +7,8 @@ Comisión: DWN4AP
 Apellidos y Nombres: Dalmasso Julieta y Pujadas Malena
 Docente: Gallino Santiago 
 Carácter de entrega: 1er parcial
+
+
+Credenciales admin:
+mail: malena.pujadas@davinvi.edu.ar 
+password: 12345678

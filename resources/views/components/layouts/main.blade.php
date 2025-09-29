@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ url('css/styles.css') }}">
 </head>
 <body class="layout">
-<body>
   
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
         <div class="container d-flex justify-content-between align-items-center">
@@ -23,10 +22,11 @@
                     <li class="nav-item"><x-nav-link route="servicios">Servicios</x-nav-link></li>
                     <li class="nav-item"><x-nav-link route="blog">Blog</x-nav-link></li>
                     @auth
-                    <form action="{{route('auth.doLogout')}}" method="POST" >
-                        @csrf
-                        <button class="nav-item" >{{auth()->user()->email}} (Cerrar Sesión) </button> 
-                     </form>
+                        <form action="{{ route('auth.doLogout') }}" method="POST" class="logout-form">
+                            @csrf
+                            <span class="user-email">{{ auth()->user()->email }}</span>
+                            <button type="submit" class="logout-link">Cerrar sesión</button>
+                        </form>
                     @else
                         <li class="nav-item"><x-nav-link route="auth.showLogin">Iniciar sesión</x-nav-link></li> 
                     @endauth
@@ -45,17 +45,17 @@
 
  
     <main class="mt-4">
-        @if (session()->has('feedback.message'))
-            <div class="alert alert-{{session()->get('feedback.type', 'success')}} text-center">
-                {{ session()->get('feedback.message') }}
-            </div>
-        @endif
+    @if (session()->has('feedback.message'))
+        <div class="alert alert-{{ session()->get('feedback.type', 'success') }} text-center">
+            {{ session()->get('feedback.message') }}
+        </div>
+    @endif
+
     {{ $slot }}
     </main>
 
- 
     <footer class="bg-light text-center text-muted py-3 mt-4 border-top">
-    <small>&copy; {{ date('Y') }} Agencia Creativa *Dalmasso y Pujadas* — Todos los derechos reservados.</small>
+        <small>&copy; {{ date('Y') }} Agencia Creativa - Dalmasso y Pujadas — Todos los derechos reservados.</small>
     </footer>
 
 </body>

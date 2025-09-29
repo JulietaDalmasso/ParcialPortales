@@ -5,7 +5,7 @@
             <div class="alert alert-danger">El formulario contiene errores y no puede ser enviado.</div>
         @endif
 
-        <label for="titulo">Titulo</label>
+        <label for="titulo">Título</label>
         <input 
             class="form-control @error('titulo') is-invalid @enderror"
             type="text" 
@@ -37,7 +37,7 @@
             <div class="text-danger" id="error_contenido">{{ $message }}</div>
         @enderror
 
-        <label for="descripcion">Descripcion</label>
+        <label for="descripcion">Descripción</label>
         <input 
             type="text" 
             id="descripcion" 

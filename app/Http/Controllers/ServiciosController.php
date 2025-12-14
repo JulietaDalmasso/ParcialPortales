@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,35 +27,26 @@ class ServiciosController extends Controller
 
     public function index()
     {
-        /* $servicios = DB::table('servicios')
-        ->select()
-        ->get(); */
-
         $servicios = Servicio::all();
-
-        /* dd($servicios); */
         return view('servicios.index', compact('servicios'));
     }
 
     public function detalle(int $id)
     {
         $servicio = Servicio::findOrFail($id);
-
-        
         return view('servicios.detalle', compact('servicio'));
     }
 
     public function crear()
     {
-        return view('servicios.crear');
+        return view('servicios.crear', [
+            'categories'=> Category::all(),
+        ]);
     }
 
     public function store(Request $request)
     {
-
         $request->validate($this->validationRules,$this->validationMessages);
-
-
 
         $data = $request->only(['nombre', 'precio', 'descripcion', 'descripcion_corta', 'imagen']);
 

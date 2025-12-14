@@ -3,8 +3,7 @@
     <x-slot:title>Iniciar sesión</x-slot:title>
 
     <div class="login-container">
-        <h2 class="login-title">Iniciar sesión</h2>
-
+        <h1 class="login-title">Iniciar sesión</h1>
         <form method="POST" action="{{ route('auth.doLogin') }}" class="login-form">
             @csrf
 

@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Malena Pujadas',
             'email' => 'malena.pujadas@davinci.edu.ar',
             'password' => Hash::make('12345678'),
+            'rol' => 'admin',
         ]);
     }
 }

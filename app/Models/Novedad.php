@@ -17,4 +17,17 @@ class Novedad extends Model
     'descripcion',
     'imagen',
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(
+            Category::class,
+            'novedades_have_categorys',
+            'novedad_fk',
+            'category_fk',
+            'novedad_id',
+            'category_id'
+        );
+    }
+
 }

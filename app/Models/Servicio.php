@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 /**
  * @property int $servicio_id
@@ -29,8 +30,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Servicio extends Model
 {
-    /* protected $table = 'servicios'; */
-
     protected $primaryKey = 'servicio_id';
 
     protected $fillable = [
@@ -41,16 +40,11 @@ class Servicio extends Model
     'imagen',
     ];
 
-    //Accesors y Mutators
-    /* protected function precio(): Attribute
+    public function users()
     {
-        return Attribute::make(
-            function($value) {
-                return $value / 100; 
-            },
-            function($value) {
-                return $value * 100; 
-            }
-        );
-    } */
+        return $this
+        ->belongsToMany(\App\Models\User::class, 'servicio_user', 'servicio_id', 'user_id')
+        ->withTimestamps();
+    }
+
 }

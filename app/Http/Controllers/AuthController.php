@@ -11,17 +11,17 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
-    
+
     public function doLogin(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
+
             return to_route('blog')
             ->with('feedback.message', 'Iniciaste sesión correctamente');
         } 
-
+        
         return redirect()->back()
         ->withInput()
         ->with('feedback.message', 'Credenciales inválidas')

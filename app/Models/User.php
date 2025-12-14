@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Servicio;
 
 /**
  * @property int $id
@@ -69,5 +70,12 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function servicios()
+    {
+        return $this
+        ->belongsToMany(\App\Models\Servicio::class, 'servicio_user', 'user_id', 'servicio_id')
+        ->withTimestamps();
     }
 }

@@ -1,6 +1,5 @@
 <x-layouts.main>
     <x-slot:title>Eliminar novedad: {{ $novedad->titulo }}</x-slot:title>
-
     <div class="delete-novedad">
         <h1 class="delete-titulo">Confirmación para eliminar la novedad</h1>
         <p>Estás por eliminar la siguiente novedad. Si estás seguro, podés continuar:</p>
@@ -9,7 +8,6 @@
             <p><strong>Título:</strong> {{ $novedad->titulo }}</p>
             <p><strong>Descripción:</strong> {{ $novedad->descripcion }}</p>
         </div>
-
         <div class="delete-actions">
             <a href="{{ route('blog') }}" class="btn-rounded">← Volver</a>
 

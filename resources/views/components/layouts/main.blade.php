@@ -23,7 +23,7 @@
                         @if(auth()->user()->rol === 'user')
                             <li class="nav-item"><x-nav-link route="user.profile">Mi perfil</x-nav-link></li>
                         @elseif(auth()->user()->rol === 'admin')
-                            <li class="nav-item"><x-nav-link route="admin">Mi panel</x-nav-link></li>
+                            <li class="nav-item"><x-nav-link route="admin">Contrataciones</x-nav-link></li>
                         @endif
 
                         <form action="{{ route('auth.doLogout') }}" method="POST" class="logout-form ms-3 d-flex align-items-center">

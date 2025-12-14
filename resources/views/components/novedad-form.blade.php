@@ -59,19 +59,25 @@ $categoryIds = $novedad?->categories->pluck('category_id')->all();
         @enderror
 
         <fieldset>
-            <legend>Categorias</legend>
+            <legend>Categorías</legend>
             @foreach ($categories as $category)
-                <label for="">
+                @php
+                    $inputId = 'category_' . $category->category_id;
+                @endphp
+        
+                <div class="categoria-item">
                     <input 
-                    type="checkbox" 
-                    name="categories[]" 
-                    value="{{$category->category_id}}"
-                    @checked(in_array($category->category_id, old('categories', $categoryIds ?? [])))
+                        type="checkbox" 
+                        id="{{ $inputId }}" 
+                        name="categories[]" 
+                        value="{{ $category->category_id }}"
+                        @checked(in_array($category->category_id, old('categories', $categoryIds ?? [])))
                     >
-                    {{$category->name}}
-                </label>  
+                    <label for="{{ $inputId }}">{{ $category->name }}</label>
+                </div>
             @endforeach
         </fieldset>
+        
         @if($editando)
             <div>
                 <p>Imagen actual:</p>

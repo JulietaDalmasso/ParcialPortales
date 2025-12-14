@@ -47,7 +47,7 @@
                 @endif 
 
                 <p class="novedad-id">ID: {{ $novedad->novedad_id }}</p>
-                <h3>{{ $novedad->titulo }}</h3>
+                <h2>{{ $novedad->titulo }}</h2>
                 <p>{{ $novedad->descripcion }}</p>
                 <div>
                     Categorias: 

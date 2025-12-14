@@ -4,7 +4,7 @@
     <section class="perfil-wrapper">
         <div class="perfil-servicios">
             <h1>Confirmar compra</h1>
-            <p>Corrobora que los datos sean correctos antes de finalizar tu compra. </p>
+            <p>Corroborá que los datos sean correctos antes de finalizar tu compra. </p>
 
             @if($user->servicios->isEmpty())
                 <p class="perfil-vacio">No contrató servicios aún.</p>

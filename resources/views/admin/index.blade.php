@@ -59,6 +59,7 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
                                 @foreach($user->servicios as $servicio)
                                     <li>
                                         <strong>{{ $servicio->nombre ?? $servicio->titulo ?? 'Servicio #' . ($servicio->servicio_id ?? $servicio->id) }}</strong>
+                                        <span class="text-muted"> - ${{ $servicio->precio }}</span> 
                                         @if(isset($servicio->pivot->created_at))
                                             — contratado el {{ $servicio->pivot->created_at->format('d/m/Y H:i') }}
                                         @endif

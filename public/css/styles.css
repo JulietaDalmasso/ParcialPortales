@@ -91,7 +91,7 @@
     border-radius: 20px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
     padding: 2rem;
-    text-align: center;
+    text-align: left;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
@@ -734,6 +734,18 @@ fieldset {
     background-color: #ff6600;
   }
   
+  .categoria-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .categoria-item label {
+    font-weight: 500;
+    color: #222;
+  }
+  
 
 /* Parte de abajo home */
 .servicios-home {
@@ -906,15 +918,14 @@ nav[role="navigation"] {
   padding: 1rem 4rem;
   background: #ffffff;
   color: #000000;
-  text-align: center;
+  text-align: left;
   position: relative;
   overflow: hidden;
 }
 
 .about-content {
-  position: relative;
-  max-width: 850px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin-left: 0;
   z-index: 1;
 }
 
@@ -942,6 +953,17 @@ nav[role="navigation"] {
 .about-description .highlight {
   color: #ff6600;
   font-weight: 600;
+}
+
+.about-photo {
+  margin: 2rem 0;
+}
+
+.about-img {
+  width: 250px;
+  border-radius: 12px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 

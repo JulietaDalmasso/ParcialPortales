@@ -75,7 +75,7 @@ class User extends Authenticatable
     public function servicios()
     {
         return $this
-        ->belongsToMany(\App\Models\Servicio::class, 'servicio_user', 'user_id', 'servicio_id')
-        ->withTimestamps();
+            ->belongsToMany(\App\Models\Servicio::class, 'servicio_user', 'user_id', 'servicio_id')
+            ->withTimestamps();
     }
 }

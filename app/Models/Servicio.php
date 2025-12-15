@@ -33,18 +33,17 @@ class Servicio extends Model
     protected $primaryKey = 'servicio_id';
 
     protected $fillable = [
-    'nombre',
-    'precio',
-    'descripcion',
-    'descripcion_corta',
-    'imagen',
+        'nombre',
+        'precio',
+        'descripcion',
+        'descripcion_corta',
+        'imagen',
     ];
 
     public function users()
     {
         return $this
-        ->belongsToMany(\App\Models\User::class, 'servicio_user', 'servicio_id', 'user_id')
-        ->withTimestamps();
+            ->belongsToMany(\App\Models\User::class, 'servicio_user', 'servicio_id', 'user_id')
+            ->withTimestamps();
     }
-
 }

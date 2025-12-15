@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Mail\ServicioComprado;
@@ -16,29 +17,30 @@ class ServicioController extends Controller
 
         if ($user->rol !== 'user') {
             return redirect()
-            ->back()
-            ->with('feedback.message', 'Solo usuarios pueden contratar.')
-            ->with('feedback.type','danger');
+                ->back()
+                ->with('feedback.message', 'Solo usuarios pueden contratar.')
+                ->with('feedback.type', 'danger');
         }
 
         $servicio = Servicio::findOrFail($id);
 
         if ($user->servicios()
             ->where('servicio_user.servicio_id', $servicio->servicio_id)
-            ->exists()) {
+            ->exists()
+        ) {
             return redirect()
-            ->back()
-            ->with('feedback.message','Ya contrataste este servicio.')
-            ->with('feedback.type','info');
+                ->back()
+                ->with('feedback.message', 'Ya contrataste este servicio.')
+                ->with('feedback.type', 'info');
         }
 
-        
+
         Mail::to(Auth::user())->send(new ServicioComprado($servicio));
 
-        $user->servicios()->attach($servicio->servicio_id);        
+        $user->servicios()->attach($servicio->servicio_id);
         return redirect()
-        ->back()
-        ->with('feedback.message', 'Contrataste el servicio ' . $servicio['nombre'] . ' con éxito')->with('feedback.type','success');
+            ->back()
+            ->with('feedback.message', 'Contrataste el servicio ' . $servicio['nombre'] . ' con éxito')->with('feedback.type', 'success');
     }
 
     public function index()
@@ -57,14 +59,14 @@ class ServicioController extends Controller
             ->where('servicio_user.servicio_id', $servicio->servicio_id)
             ->exists()) {
             return redirect()
-            ->back()
-            ->with('feedback.message','No tienes contratado este servicio.')
-            ->with('feedback.type','info');
+                ->back()
+                ->with('feedback.message', 'No tienes contratado este servicio.')
+                ->with('feedback.type', 'info');
         }
 
-        $user->servicios()->detach($servicio->servicio_id);        
+        $user->servicios()->detach($servicio->servicio_id);
         return redirect()
-        ->back()
-        ->with('feedback.message', 'Cancelaste el servicio ' . $servicio['nombre'] . ' con éxito')->with('feedback.type','success');
+            ->back()
+            ->with('feedback.message', 'Cancelaste el servicio ' . $servicio['nombre'] . ' con éxito')->with('feedback.type', 'success');
     }
 }

@@ -6,21 +6,22 @@
             <h1>Confirmar compra</h1>
             <p>Corroborá que los datos sean correctos antes de finalizar tu compra. </p>
 
-            @if($user->servicios->isEmpty())
+            @if ($user->servicios->isEmpty())
                 <p class="perfil-vacio">No contrató servicios aún.</p>
             @else
                 <ul class="perfil-servicios-lista">
-                    @foreach($user->servicios as $servicio)
-                        <li class="perfil-servicio-item" style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
+                    @foreach ($user->servicios as $servicio)
+                        <li class="perfil-servicio-item"
+                            style="display:flex; justify-content:space-between; align-items:center; gap:1rem;">
                             <div>
-                                <strong>{{ $servicio->nombre ?? $servicio->titulo ?? 'Servicio #' . ($servicio->servicio_id ?? $servicio->id) }}</strong>
+                                <strong>{{ $servicio->nombre ?? ($servicio->titulo ?? 'Servicio #' . ($servicio->servicio_id ?? $servicio->id)) }}</strong>
                                 <strong style="color: black">— ${{ $servicio->precio }}</strong>
                             </div>
                             <div>
-                                <form action="{{ route('servicios.cancelar', $servicio->servicio_id) }}" method="POST" >
+                                <form action="{{ route('servicios.cancelar', $servicio->servicio_id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="btn-eliminar">Eliminar</button>
-                                </form>  
+                                </form>
                             </div>
                         </li>
                     @endforeach
@@ -39,11 +40,11 @@
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script>
-        const mp = new MercadoPago('<?= $MPPublicKey;?>');
+        const mp = new MercadoPago('<?= $MPPublicKey ?>');
 
         mp.bricks().create('wallet', 'payment_button', {
-            initialization : {
-                preferenceId : '<?= $preference->id; ?>',
+            initialization: {
+                preferenceId: '<?= $preference->id ?>',
             }
         });
     </script>

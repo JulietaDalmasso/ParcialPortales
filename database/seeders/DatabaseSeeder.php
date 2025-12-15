@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             ServicioSeeder::class,
             CategorySeeder::class,
             NovedadSeeder::class,
-            UserSeeder::class, 
+            UserSeeder::class,
             NovedadHasCategorySeeder::class,
             ContratacionesSeeder::class,
         ]);

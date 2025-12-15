@@ -11,27 +11,27 @@ Route::get('/servicios', [App\Http\Controllers\ServiciosController::class, 'inde
 Route::get('/blog', [App\Http\Controllers\NovedadesController::class, 'blog'])->name('blog');
 
 //detalle del blog
-Route::get('/novedades/{id}', [App\Http\Controllers\NovedadesController::class, 'detalle'] )
-->name('novedades.detalle')
-->whereNumber('id');
+Route::get('/novedades/{id}', [App\Http\Controllers\NovedadesController::class, 'detalle'])
+    ->name('novedades.detalle')
+    ->whereNumber('id');
 
 //rutas para login
 Route::get('/ingresar', [App\Http\Controllers\AuthController::class, 'showLogin'])
-->name('auth.showLogin');
+    ->name('auth.showLogin');
 
 Route::post('/ingresar', [App\Http\Controllers\AuthController::class, 'doLogin'])
-->name('auth.doLogin');
+    ->name('auth.doLogin');
 
 //cerrar sesion
 Route::post('/cerrar-sesion', [App\Http\Controllers\AuthController::class, 'doLogout'])
-->name('auth.doLogout');
+    ->name('auth.doLogout');
 
 //admin
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])
-->middleware(['auth', CheckRol::class . ':admin'])
-->name('admin');
+    ->middleware(['auth', CheckRol::class . ':admin'])
+    ->name('admin');
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     //ruta para contratar un servicio
     Route::post('/servicios/{id}/contratar', [App\Http\Controllers\ServicioController::class, 'contratar'])->name('servicios.contratar');
 });
@@ -41,33 +41,42 @@ Route::get('/perfil', [App\Http\Controllers\UserController::class, 'myProfile'])
     ->middleware('auth')
     ->name('user.profile');
 
+//ruta para editar perfil
+Route::get('/perfil/editar', [App\Http\Controllers\UserController::class, 'edit'])
+    ->middleware('auth')
+    ->name('user.edit');
+
+//ruta para actualizar perfil
+Route::post('/perfil/editar', [App\Http\Controllers\UserController::class, 'update'])
+    ->middleware('auth')
+    ->name('user.update');
+
 // Perfil de usuario por id (solo admin puede ver otros perfiles)
 Route::get('/usuarios/{user}', [App\Http\Controllers\UserController::class, 'show'])
-    ->middleware(['auth', CheckRol::class . ':admin']) 
+    ->middleware(['auth', CheckRol::class . ':admin'])
     ->name('user.show');
 
 //ruta para crear un nuevo blog
 Route::middleware(['auth', CheckRol::class . ':admin'])
     ->controller(App\Http\Controllers\NovedadesController::class)
-    ->group(function(){
-    Route::get('/novedades/nuevo', 'crear')->name('novedades.crear');
+    ->group(function () {
+        Route::get('/novedades/nuevo', 'crear')->name('novedades.crear');
 
-    //ruta para crear un nuevo blog
-    Route::post('/novedades/nuevo', 'store')->name('novedades.store');
+        //ruta para crear un nuevo blog
+        Route::post('/novedades/nuevo', 'store')->name('novedades.store');
 
-    //ruta para editar un blog
-    Route::get('/novedades/{id}/editar', 'editar')->name('novedades.editar');
+        //ruta para editar un blog
+        Route::get('/novedades/{id}/editar', 'editar')->name('novedades.editar');
 
-    //ruta para editar un blog
-    Route::post('/novedades/{id}/editar', 'actualizar')->name('novedades.actualizar');
+        //ruta para editar un blog
+        Route::post('/novedades/{id}/editar', 'actualizar')->name('novedades.actualizar');
 
-    //ruta para eliminar un blog
-    Route::get('/novedades/{id}/eliminar', 'eliminar')->name('novedades.eliminar');
+        //ruta para eliminar un blog
+        Route::get('/novedades/{id}/eliminar', 'eliminar')->name('novedades.eliminar');
 
-    //ruta para eliminar un blog
-    Route::post('/novedades/{id}/eliminar', 'destruir')->name('novedades.destruir');
-
-});
+        //ruta para eliminar un blog
+        Route::post('/novedades/{id}/eliminar', 'destruir')->name('novedades.destruir');
+    });
 
 //ruta para reigstrarse
 Route::get('registro', [App\Http\Controllers\RegisterController::class, 'showRegister'])->name('auth.showRegister');
@@ -83,5 +92,3 @@ Route::get('/mp-test/failure', [App\Http\Controllers\MercadoPagoController::clas
 Route::get('/mp-test/pending', [App\Http\Controllers\MercadoPagoController::class, 'pending'])->name('mp.test.pending');
 
 Route::post('/servicios/{id}/cancelar', [App\Http\Controllers\ServicioController::class, 'cancelar'])->name('servicios.cancelar');
-
-

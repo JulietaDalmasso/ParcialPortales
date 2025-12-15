@@ -19,13 +19,13 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
 
             return to_route('blog')
-            ->with('feedback.message', 'Iniciaste sesión correctamente');
-        } 
-        
+                ->with('feedback.message', 'Iniciaste sesión correctamente');
+        }
+
         return redirect()->back()
-        ->withInput()
-        ->with('feedback.message', 'Credenciales inválidas')
-        ->with('feedback.type', 'danger');
+            ->withInput()
+            ->with('feedback.message', 'Credenciales inválidas')
+            ->with('feedback.type', 'danger');
     }
 
     public function doLogout(Request $request)
@@ -36,6 +36,6 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return to_route('auth.showLogin')
-        ->with('feedback.message', 'Cerraste sesión correctamente');
+            ->with('feedback.message', 'Cerraste sesión correctamente');
     }
 }

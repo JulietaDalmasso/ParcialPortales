@@ -12,10 +12,10 @@ class Novedad extends Model
     protected $primaryKey = 'novedad_id';
 
     protected $fillable = [
-    'titulo',
-    'contenido',
-    'descripcion',
-    'imagen',
+        'titulo',
+        'contenido',
+        'descripcion',
+        'imagen',
     ];
 
     public function categories()
@@ -29,5 +29,4 @@ class Novedad extends Model
             'category_id'
         );
     }
-
 }

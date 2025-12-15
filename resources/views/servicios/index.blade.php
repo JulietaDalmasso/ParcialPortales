@@ -10,18 +10,17 @@
                     <p><strong>Precio:</strong> ${{ $servicio->precio }}</p>
                     <p><strong>Descripción corta:</strong> {{ $servicio->descripcion_corta }}</p>
                     <p><strong>Descripción larga:</strong> {{ $servicio->descripcion }}</p>
-                @auth
-                    @if(auth()->user()->rol === 'user')
-                        <form action="{{ route('servicios.contratar', ['id' => $servicio->servicio_id]) }}" method="POST" style="display:inline">
-                            @csrf
-                            <button type="submit" class="btn-rounded">Contratar</button>
-                        </form>
-                    @endif
-                @endauth
+                    @auth
+                        @if (auth()->user()->rol === 'user')
+                            <form action="{{ route('servicios.contratar', ['id' => $servicio->servicio_id]) }}" method="POST"
+                                style="display:inline">
+                                @csrf
+                                <button type="submit" class="btn-rounded">Contratar</button>
+                            </form>
+                        @endif
+                    @endauth
                 </div>
             @endforeach
         </div>
     </div>
 </x-layouts.main>
-
-

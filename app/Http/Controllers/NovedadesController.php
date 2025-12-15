@@ -15,7 +15,7 @@ class NovedadesController extends Controller
         'titulo' => 'required|min:2',
         'contenido' => 'required|min:30',
         'descripcion' => 'required|min:10',
-    ]; 
+    ];
 
     private array $validationMessages = [
         'titulo.required' => 'El titulo es obligatorio',
@@ -24,12 +24,11 @@ class NovedadesController extends Controller
         'contenido.min' => 'El contenido debe tener al menos :min caracteres',
         'descripcion.required' => 'La descripción es obligatoria',
         'descripcion.min' => 'La descripción debe tener al menos :min caracteres',
-    ]; 
+    ];
 
     public function __construct(
         protected NovedadRepository $repo
-    )
-    {} 
+    ) {}
 
     public function blog(Request $request)
     {
@@ -48,7 +47,7 @@ class NovedadesController extends Controller
         return view('blog', [
             'novedades' => $allNovedades,
             'categories' => Category::all(),
-            'searchParams' => $searchParams, 
+            'searchParams' => $searchParams,
         ]);
     }
 
@@ -66,7 +65,7 @@ class NovedadesController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate($this->validationRules,$this->validationMessages); 
+        $request->validate($this->validationRules, $this->validationMessages);
 
         try {
             $data = $request->only(['titulo', 'contenido', 'descripcion', 'imagen']);
@@ -75,14 +74,9 @@ class NovedadesController extends Controller
                 $data['imagen'] = $request->file('imagen')->store('imagenes', 'public');
             }
 
-            /* DB::transaction(function () use ($data, $request) {
-                $novedad = Novedad::create($data);
-                $novedad->categories()->attach($request->input('categories', []));
-            }); */
             $data['categories'] = $request->input('categories', []);
-            /* $repo = new EloquentNovedadRepositorie(); */
             $this->repo->insert($data);
-             
+
             return to_route('blog')
                 ->with('feedback.message', 'El blog ' . $data['titulo'] . ' se creó correctamente');
         } catch (\Throwable $th) {
@@ -92,22 +86,21 @@ class NovedadesController extends Controller
         }
     }
 
-    public function editar(int $id) 
+    public function editar(int $id)
     {
         return view('novedades.editar', [
-            'novedad'=> $this->repo->find($id),
+            'novedad' => $this->repo->find($id),
             'categories' => Category::all()
         ]);
-    } 
+    }
 
     public function actualizar(Request $request, int $id)
     {
-        $request->validate($this->validationRules,$this->validationMessages);
+        $request->validate($this->validationRules, $this->validationMessages);
 
         try {
             $data = $request->only(['titulo', 'contenido', 'descripcion', 'imagen']);
 
-            /* $novedad = Novedad::findOrFail($id); */
             $novedad = $this->repo->find($id);
             $oldImagen = null;
 
@@ -119,7 +112,7 @@ class NovedadesController extends Controller
             $data['categories'] = $request->input('categories', []);
             $this->repo->update($id, $data);
 
-            //  Elimina imagen anterior si existe
+            //  elimina imagen anterior si existe
             if ($oldImagen !== null && \Storage::exists($oldImagen)) {
                 \Storage::delete($oldImagen);
             }
@@ -131,26 +124,22 @@ class NovedadesController extends Controller
                 ->with('feedback.message', 'Ocurrio un error, el blog no se pudo actualizar')
                 ->with('feedback.type', 'danger');
         }
-    } 
+    }
 
-    public function eliminar(int $id) 
+    public function eliminar(int $id)
     {
         return view('novedades.eliminar', [
-            'novedad'=> Novedad::findOrFail($id)
+            'novedad' => Novedad::findOrFail($id)
         ]);
-    } 
+    }
 
     public function destruir(int $id)
     {
         try {
             $novedad = Novedad::findOrFail($id);
-            
-            /* DB::transaction(function () use ($novedad) {
-                $novedad->categories()->detach();
-                $novedad->delete();
-            }); */
+
             $this->repo->delete($id);
- 
+
             if ($novedad->imagen && \Storage::exists($novedad->imagen)) {
                 \Storage::delete($novedad->imagen);
             }
@@ -162,5 +151,5 @@ class NovedadesController extends Controller
                 ->with('feedback.message', 'Ocurrio un error, el blog no se pudo eliminar')
                 ->with('feedback.type', 'danger');
         }
-    } 
+    }
 }

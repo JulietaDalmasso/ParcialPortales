@@ -15,11 +15,12 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
             <div class="">
                 <h2>Usuarios sin compras</h2>
 
-                @if($sinCompras->isEmpty())
+                @if ($sinCompras->isEmpty())
                     <p class="empty-note">No hay usuarios sin compras.</p>
                 @else
-                    @foreach($sinCompras as $user)
-                        <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}" class="card mb-4 p-3 card-link" style="display:block; text-decoration:none; color:inherit;">
+                    @foreach ($sinCompras as $user)
+                        <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}"
+                            class="card mb-4 p-3 card-link" style="display:block; text-decoration:none; color:inherit;">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <strong>{{ $user->name }}</strong>
@@ -36,14 +37,15 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
 
             <div class="">
                 <h2>Usuarios con compras</h2>
-                @if($conCompras->isEmpty())
+                @if ($conCompras->isEmpty())
                     <p class="empty-note">No hay contrataciones aún.</p>
                 @else
-                    @foreach($conCompras as $user)
+                    @foreach ($conCompras as $user)
                         <div class="card mb-4 p-3">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}" class="stretched-link text-decoration-none">
+                                    <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}"
+                                        class="stretched-link text-decoration-none">
                                         <strong>{{ $user->name }}</strong>
                                     </a>
                                     <div class="text-muted">{{ $user->email }}</div>
@@ -56,11 +58,11 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
                             </div>
 
                             <ul class="servicio-list">
-                                @foreach($user->servicios as $servicio)
+                                @foreach ($user->servicios as $servicio)
                                     <li>
-                                        <strong>{{ $servicio->nombre ?? $servicio->titulo ?? 'Servicio #' . ($servicio->servicio_id ?? $servicio->id) }}</strong>
-                                        <span class="text-muted"> - ${{ $servicio->precio }}</span> 
-                                        @if(isset($servicio->pivot->created_at))
+                                        <strong>{{ $servicio->nombre ?? ($servicio->titulo ?? 'Servicio #' . ($servicio->servicio_id ?? $servicio->id)) }}</strong>
+                                        <span class="text-muted"> - ${{ $servicio->precio }}</span>
+                                        @if (isset($servicio->pivot->created_at))
                                             — contratado el {{ $servicio->pivot->created_at->format('d/m/Y H:i') }}
                                         @endif
                                     </li>

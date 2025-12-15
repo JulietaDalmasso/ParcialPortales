@@ -12,14 +12,14 @@ class MercadoPagoController extends Controller
 {
     public function index()
     {
-        try{
+        try {
             MercadoPagoConfig::setAccessToken(config('mercadopago.access_token'));
 
             //simular carrito de compras
-            $servicios = Servicio::whereIn('servicio_id', [1,2])->get();
+            $servicios = Servicio::whereIn('servicio_id', [1, 2])->get();
 
             $items = [];
-            foreach($servicios as $servicio){
+            foreach ($servicios as $servicio) {
                 $items[] = [
                     'id' => $servicio->servicio_id,
                     'title' => $servicio->nombre,
@@ -43,14 +43,13 @@ class MercadoPagoController extends Controller
 
             return view('mercadopago.test', [
                 'servicios' => $servicios,
-                'preference' => $preference, 
+                'preference' => $preference,
                 'MPPublicKey' => config('mercadopago.public_key'),
                 'user' => $user,
             ]);
-        }catch(\MercadoPago\Exceptions\MPApiException $e){
+        } catch (\MercadoPago\Exceptions\MPApiException $e) {
             echo "Error en la preparación del pago: " . $e->getApiResponse()->getContent()['message'];
-
-        }catch(\Throwable $e){
+        } catch (\Throwable $e) {
             throw $e;
         }
     }

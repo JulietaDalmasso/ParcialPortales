@@ -1,4 +1,3 @@
-
 <x-layouts.main>
     <x-slot:title>Iniciar sesión</x-slot:title>
 
@@ -13,13 +12,8 @@
 
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    class="@error('email') is-invalid @enderror"
-                    value="{{ old('email') }}"
-                >
+                <input type="email" id="email" name="email" class="@error('email') is-invalid @enderror"
+                    value="{{ old('email') }}">
                 @error('email')
                     <div class="text-danger" id="error_email">{{ $message }}</div>
                 @enderror
@@ -27,12 +21,7 @@
 
             <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    class="@error('password') is-invalid @enderror"
-                >
+                <input type="password" id="password" name="password" class="@error('password') is-invalid @enderror">
                 @error('password')
                     <div class="text-danger" id="error_password">{{ $message }}</div>
                 @enderror

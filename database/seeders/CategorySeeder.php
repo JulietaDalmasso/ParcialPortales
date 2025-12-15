@@ -15,23 +15,23 @@ class CategorySeeder extends Seeder
     {
         Category::create([
             'category_id' => 1,
-            'name' => 'Inteligencia Artificial', 
+            'name' => 'Inteligencia Artificial',
         ]);
         Category::create([
             'category_id' => 2,
-            'name' => 'Diseño Web', 
+            'name' => 'Diseño Web',
         ]);
         Category::create([
             'category_id' => 3,
-            'name' => 'Marketing Digital', 
+            'name' => 'Marketing Digital',
         ]);
         Category::create([
             'category_id' => 4,
-            'name' => 'Programación', 
+            'name' => 'Programación',
         ]);
         Category::create([
             'category_id' => 5,
-            'name' => 'Otro', 
+            'name' => 'Otro',
         ]);
     }
 }

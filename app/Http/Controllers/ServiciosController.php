@@ -40,32 +40,32 @@ class ServiciosController extends Controller
     public function crear()
     {
         return view('servicios.crear', [
-            'categories'=> Category::all(),
+            'categories' => Category::all(),
         ]);
     }
 
     public function store(Request $request)
     {
-        $request->validate($this->validationRules,$this->validationMessages);
+        $request->validate($this->validationRules, $this->validationMessages);
 
         $data = $request->only(['nombre', 'precio', 'descripcion', 'descripcion_corta', 'imagen']);
 
         $servicio = Servicio::create($data);
 
         return to_route('servicios')
-        ->with('feedback.message', 'El servicio ' . $data['nombre'] . ' se creó correctamente');
+            ->with('feedback.message', 'El servicio ' . $data['nombre'] . ' se creó correctamente');
     }
 
-    public function editar(int $id) 
+    public function editar(int $id)
     {
         return view('servicios.editar', [
-            'servicio'=> Servicio::findOrFail($id)
+            'servicio' => Servicio::findOrFail($id)
         ]);
-    } 
+    }
 
     public function actualizar(Request $request, int $id)
     {
-        $request->validate($this->validationRules,$this->validationMessages);
+        $request->validate($this->validationRules, $this->validationMessages);
 
         $data = $request->only(['nombre', 'precio', 'descripcion', 'descripcion_corta', 'imagen']);
 
@@ -73,13 +73,13 @@ class ServiciosController extends Controller
         $servicio->update($data);
 
         return to_route('servicios')
-        ->with('feedback.message', 'El servicio ' . $data['nombre'] . ' se actualizó correctamente');
+            ->with('feedback.message', 'El servicio ' . $data['nombre'] . ' se actualizó correctamente');
     }
 
-    public function eliminar(int $id) 
+    public function eliminar(int $id)
     {
         return view('servicios.eliminar', [
-            'servicio'=> Servicio::findOrFail($id)
+            'servicio' => Servicio::findOrFail($id)
         ]);
     }
 
@@ -88,14 +88,13 @@ class ServiciosController extends Controller
         try {
             $servicio = Servicio::findOrFail($id);
             $servicio->delete();
- 
+
             return to_route('servicios')
-            ->with('feedback.message', 'El servicio ' . $servicio->nombre . ' se eliminó correctamente');
+                ->with('feedback.message', 'El servicio ' . $servicio->nombre . ' se eliminó correctamente');
         } catch (\Throwable $th) {
             return to_route('servicios')
-            ->with('feedback.message', 'Ocurrio un error, el servicio no se pudo eliminar')
-            ->with('feedback.type', 'danger');
+                ->with('feedback.message', 'Ocurrio un error, el servicio no se pudo eliminar')
+                ->with('feedback.type', 'danger');
         }
-        
     }
 }

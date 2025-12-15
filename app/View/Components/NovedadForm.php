@@ -18,8 +18,7 @@ class NovedadForm extends Component
         protected Collection|array $categories,
         protected ?Novedad $novedad = null,
 
-    )
-    {
+    ) {
         //
     }
 
@@ -28,7 +27,7 @@ class NovedadForm extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.novedad-form',[
+        return view('components.novedad-form', [
             'action' => $this->action,
             'categories' => $this->categories,
             'novedad' => $this->novedad,

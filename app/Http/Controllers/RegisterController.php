@@ -31,6 +31,6 @@ class RegisterController extends Controller
 
         Auth::login($user);
 
-        return to_route('blog')->with('feedback.message','Registro exitoso. Bienvenido!');
+        return to_route('blog')->with('feedback.message', 'Registro exitoso. Bienvenido!');
     }
 }

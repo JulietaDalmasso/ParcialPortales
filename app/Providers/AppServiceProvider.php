@@ -16,8 +16,9 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //registro el uso de EloquentNovedadRepositorie cada vez que se solicite NovedadRepositorie
-        $this->app->bind(NovedadRepository::class, 
-        QueryBuilderNovedadRepository::class
+        $this->app->bind(
+            NovedadRepository::class,
+            QueryBuilderNovedadRepository::class
         );
     }
 

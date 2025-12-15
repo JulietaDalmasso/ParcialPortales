@@ -12,12 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('novedades_have_categorys', function (Blueprint $table) {
-            $table->foreignId('novedad_fk')->constrained(table:'novedades', column: 'novedad_id');
+            $table->foreignId('novedad_fk')->constrained(table: 'novedades', column: 'novedad_id');
             $table->unsignedSmallInteger('category_fk');
             $table->foreign('category_fk')->references('category_id')->on('categories');
-            
             $table->timestamps();
-
             $table->primary(['novedad_fk', 'category_fk']);
         });
     }

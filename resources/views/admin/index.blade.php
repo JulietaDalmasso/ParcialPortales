@@ -11,11 +11,11 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
 
         <div class="estadisticas mt-4">
             <h2>Estadísticas generales</h2>
-            <p>Total de usuarios registrados: {{ $users->count() }}</p>
-            <p>Usuarios registrados con contrataciones: {{ $conCompras->count() }}</p>
-            <p>Usuarios registrados sin contrataciones: {{ $sinCompras->count() }}</p>
-            <p>Servicio más contratado: {{ $servicioMasContratado->nombre ?? 'N/A' }}</p>
-            <p>Total de contrataciones: {{ $users->sum(fn($u) => $u->servicios->count()) }}</p>
+            <p>Total de usuarios registrados: <strong>{{ $users->count() }}</strong></p>
+            <p>Usuarios registrados con contrataciones: <strong>{{ $conCompras->count() }}</strong></p>
+            <p>Usuarios registrados sin contrataciones: <strong>{{ $sinCompras->count() }}</strong></p>
+            <p>Servicio más contratado: <strong>{{ $servicioMasContratado->nombre ?? 'N/A' }}</strong></p>
+            <p>Total de contrataciones: <strong>{{ $users->sum(fn($u) => $u->servicios->count()) }}</strong></p>
         </div>
 
         <p class="subtitulo-admin">Usuarios y contrataciones</p>
@@ -29,8 +29,7 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
                 @else
                     @foreach ($sinCompras as $user)
                         <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}"
-                            class="card mb-4 p-3 card-link"
-                            style="display:block; text-decoration:none; color:inherit;">
+                            class="card mb-4 p-3 card-link" style="display:block; text-decoration:none; color:inherit;">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <strong>{{ $user->name }}</strong>

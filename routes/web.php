@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\CheckRol;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 
 //home
@@ -92,3 +93,8 @@ Route::get('/mp-test/failure', [App\Http\Controllers\MercadoPagoController::clas
 Route::get('/mp-test/pending', [App\Http\Controllers\MercadoPagoController::class, 'pending'])->name('mp.test.pending');
 
 Route::post('/servicios/{id}/cancelar', [App\Http\Controllers\ServicioController::class, 'cancelar'])->name('servicios.cancelar');
+
+//ruta para el webhook de mp
+Route::post('mp-test/confirmacion-pago', [App\Http\Controllers\MercadoPagoController::class, 'paymentConfirmation'])
+    ->name('mp.test.payment.confirmation')
+    ->withoutMiddleware([VerifyCsrfToken::class]);

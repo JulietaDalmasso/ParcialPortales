@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
 
@@ -32,7 +33,7 @@ class MercadoPagoController extends Controller
             $preference = $preferencesFactory->create([
                 'items' => $items,
                 'back_urls' => [
-                    'success' => 'https://localhost:8000/mp-test/success',
+                    'success' => 'https://proreform-crunchingly-vaughn.ngrok-free.dev/mp-test/success',
                     'failure' => route('mp.test.failure'),
                     'pending' => route('mp.test.pending'),
                 ],
@@ -58,5 +59,10 @@ class MercadoPagoController extends Controller
     {
         echo "Compra exitosa. La data recibida es: ";
         dd($request->input());
+    }
+
+    public function paymentConfirmation(Request $request)
+    {
+        Log::info('Pago recibido: ' . collect($request->input()));
     }
 }

@@ -64,7 +64,6 @@ class QueryBuilderNovedadRepository implements NovedadRepository
 
     public function find(mixed $pk)
     {
-        /* return DB::table('novedades')->select()->where('novedad_id', '=', $pk)->first(); */
         return Novedad::findOrFail($pk);
     }
 

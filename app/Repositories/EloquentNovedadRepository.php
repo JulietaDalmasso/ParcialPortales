@@ -7,13 +7,6 @@ use App\Models\Novedad;
 
 class EloquentNovedadRepository implements NovedadRepository
 {
-    /* protected $model;
-
-    public function __construct(\App\Models\Novedad $model)
-    {
-        $this->model = $model;
-    } */
-
     public function insert(array $data)
     {
         DB::transaction(function () use ($data) {

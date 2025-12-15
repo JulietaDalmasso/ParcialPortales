@@ -13,8 +13,8 @@ class AdminController extends Controller
         $users = User::with('servicios')->orderBy('name')->paginate(20);
 
         $servicioMasContratado = Servicio::withCount('users')
-        ->orderByDesc('users_count')
-        ->first();
+            ->orderByDesc('users_count')
+            ->first();
 
         return view('admin.index', compact('users', 'servicioMasContratado'));
     }

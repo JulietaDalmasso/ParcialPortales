@@ -9,6 +9,15 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
     <div class="admin-panel">
         <h1 class="crear-titulo">Panel de Administración</h1>
 
+        <div class="estadisticas mt-4">
+            <h2>Estadísticas generales</h2>
+            <p>Total de usuarios registrados: {{ $users->count() }}</p>
+            <p>Usuarios registrados con contrataciones: {{ $conCompras->count() }}</p>
+            <p>Usuarios registrados sin contrataciones: {{ $sinCompras->count() }}</p>
+            <p>Servicio más contratado: {{ $servicioMasContratado->nombre ?? 'N/A' }}</p>
+            <p>Total de contrataciones: {{ $users->sum(fn($u) => $u->servicios->count()) }}</p>
+        </div>
+
         <p>Usuarios y contrataciones</p>
 
         <div class="admin-columns">

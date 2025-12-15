@@ -1,5 +1,5 @@
 <x-layouts.main>
-    <x-slot:title>Prueba de integración con Mercado Pago</x-slot:title>
+    <x-slot:title>Carrito</x-slot:title>
 
     <section class="perfil-wrapper">
         <div class="perfil-servicios">
@@ -29,13 +29,14 @@
                 <div class="btn-pagar">
                     Total a pagar: <strong>${{ $user->servicios->sum('precio') }}</strong>
                 </div>
+                {{-- boton de pago --}}
+                <div id="payment_button">
+
+                </div>
             @endif
         </div>
 
-        {{-- boton de pago --}}
-        <div id="payment_button">
-
-        </div>
+        
     </section>
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>

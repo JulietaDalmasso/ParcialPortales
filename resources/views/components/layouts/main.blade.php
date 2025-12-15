@@ -24,6 +24,7 @@
                     @auth
                         @if (auth()->user()->rol === 'user')
                             <li class="nav-item"><x-nav-link route="user.profile">Mi perfil</x-nav-link></li>
+                            <li class="nav-item"><x-nav-link route="mp.test">Mi Carrito</x-nav-link></li>
                         @elseif(auth()->user()->rol === 'admin')
                             <li class="nav-item"><x-nav-link route="admin">Contrataciones</x-nav-link></li>
                         @endif
@@ -34,7 +35,6 @@
                             <span class="user-email me-2">{{ auth()->user()->email }}</span>
                             <button type="submit" class="logout-link">Cerrar sesión</button>
                         </form>
-                        <li class="nav-item"><x-nav-link route="mp.test">Mi Carrito</x-nav-link></li>
                     @else
                         <li class="nav-item"><x-nav-link route="auth.showLogin">Iniciar sesión</x-nav-link></li>
                         <li class="nav-item"><x-nav-link route="auth.showRegister">Registrarme</x-nav-link></li>

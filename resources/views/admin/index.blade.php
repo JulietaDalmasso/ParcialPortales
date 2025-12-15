@@ -18,7 +18,7 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
             <p>Total de contrataciones: {{ $users->sum(fn($u) => $u->servicios->count()) }}</p>
         </div>
 
-        <p>Usuarios y contrataciones</p>
+        <p class="subtitulo-admin">Usuarios y contrataciones</p>
 
         <div class="admin-columns">
             <div class="">
@@ -29,7 +29,8 @@ $conCompras = $users->filter(fn($u) => $u->servicios->isNotEmpty());
                 @else
                     @foreach ($sinCompras as $user)
                         <a href="{{ auth()->check() && auth()->id() === $user->id ? route('user.profile') : route('user.show', $user->id) }}"
-                            class="card mb-4 p-3 card-link" style="display:block; text-decoration:none; color:inherit;">
+                            class="card mb-4 p-3 card-link"
+                            style="display:block; text-decoration:none; color:inherit;">
                             <div class="d-flex justify-content-between">
                                 <div>
                                     <strong>{{ $user->name }}</strong>
